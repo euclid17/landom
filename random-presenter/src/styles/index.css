@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 :root {
-  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --bg-gradient: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
   --text-primary: #2d3436;
   --text-secondary: #636e72;
   --accent: #ff6b81;
@@ -21,7 +21,10 @@
 
 body {
   font-family: 'Jua', sans-serif;
-  background: var(--bg-gradient);
+  background-color: #87CEEB;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200" opacity="0.8"><path d="M 25 60 a 15 15 0 0 1 10 -25 a 20 20 0 0 1 35 0 a 15 15 0 0 1 10 25 z" fill="white"/></svg>'), linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
+  background-position: 0 0, 0 0;
+  background-size: 300px 300px, 100% 100%;
   color: var(--text-primary);
   min-height: 100vh;
   display: flex;

@@ -85,25 +85,25 @@
 
 .crank {
   width: 20px;
-  height: 45px;
+  height: 50px;
   background: radial-gradient(circle at center, #ffd6a5, #fdffb6); /* Pastel accent */
   border-radius: 10px;
   position: absolute;
-  top: 8px;
-  transform-origin: bottom center;
+  top: 5px;
+  transform-origin: top center;
   transition: transform 0.5s ease;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
   border: 2px solid #fff;
 }
 
 .machine-body.turning .crank {
-  animation: turnCrank 1s ease-in-out;
+  animation: pullDownCrank 1s ease-in-out;
 }
 
-@keyframes turnCrank {
+@keyframes pullDownCrank {
   0% { transform: rotate(0deg); }
-  50% { transform: rotate(180deg); }
-  100% { transform: rotate(360deg); }
+  50% { transform: rotate(45deg); }
+  100% { transform: rotate(0deg); }
 }
 
 .dispenser {
@@ -156,16 +156,49 @@
   box-shadow: 0 30px 60px rgba(0,0,0,0.2), inset 0 0 0 4px #ffc6ff;
   z-index: 10;
   text-align: center;
-  animation: popReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: popReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, floatSparkle 2s infinite ease-in-out;
   backdrop-filter: blur(10px);
 }
 
+.result-reveal::before, .result-reveal::after {
+  content: '✨';
+  position: absolute;
+  font-size: 2rem;
+  animation: sparkleTwinkle 1s infinite alternate;
+}
+
+.result-reveal::before {
+  top: -15px; left: -15px;
+}
+.result-reveal::after {
+  bottom: -15px; right: -15px;
+}
+
+@keyframes sparkleTwinkle {
+  0% { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
+  100% { transform: scale(1.2) rotate(20deg); opacity: 1; }
+}
+
+@keyframes floatSparkle {
+  0%, 100% { transform: translate(-50%, -50%) translateZ(100px) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateZ(100px) translateY(-10px); }
+}
+
 .result-name {
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 800;
-  color: #ffb4a2;
   margin: 0;
-  text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(0,0,0,0.05);
+  background: linear-gradient(to right, #ff4757, #ffa502, #2ed573, #1e90ff, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShake 0.5s infinite;
+  display: inline-block;
+}
+
+@keyframes textShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
 }
 
 @keyframes popReveal {

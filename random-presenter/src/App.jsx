@@ -9,6 +9,7 @@ function App() {
   const [students, setStudents] = useState([]);
   const [secretOrder, setSecretOrder] = useState([]);
   const [pickedStudents, setPickedStudents] = useState([]);
+  const [title, setTitle] = useState('🎲 랜덤 발표자 뽑기');
   
   const [view, setView] = useState('main'); // 'main' or 'settings'
   const [isSecretModalOpen, setIsSecretModalOpen] = useState(false);
@@ -25,12 +26,17 @@ function App() {
     setStudents(storage.getStudents());
     setSecretOrder(storage.getSecretOrder());
     setPickedStudents(storage.getPickedStudents());
+    setTitle(storage.getTitle());
   }, []);
 
   // Save data on change
   useEffect(() => {
     storage.saveStudents(students);
   }, [students]);
+
+  useEffect(() => {
+    storage.saveTitle(title);
+  }, [title]);
 
   useEffect(() => {
     storage.saveSecretOrder(secretOrder);
@@ -116,9 +122,25 @@ function App() {
             <button className="secondary" onClick={() => setView('settings')}>명단 설정</button>
           </div>
 
-          <h1 style={{ fontSize: '3rem', marginBottom: '2rem', textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>
-            🎲 랜덤 발표자 뽑기
-          </h1>
+          <input 
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ 
+              fontSize: '3rem', 
+              fontWeight: '800', 
+              textAlign: 'center', 
+              marginBottom: '2rem', 
+              textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              fontFamily: 'inherit',
+              color: 'inherit',
+              width: '100%',
+              padding: '0'
+            }}
+          />
 
           <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', alignItems: 'center', background: 'var(--glass-bg)', padding: '1rem 2rem', borderRadius: '20px', boxShadow: 'var(--glass-shadow)' }}>
             <span style={{ fontWeight: '600' }}>추출 인원:</span>
