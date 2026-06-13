@@ -163,15 +163,15 @@
 .result-reveal::before, .result-reveal::after {
   content: '✨';
   position: absolute;
-  font-size: 2rem;
+  font-size: 4rem;
   animation: sparkleTwinkle 1s infinite alternate;
 }
 
 .result-reveal::before {
-  top: -15px; left: -15px;
+  top: -30px; left: -30px;
 }
 .result-reveal::after {
-  bottom: -15px; right: -15px;
+  bottom: -30px; right: -30px;
 }
 
 @keyframes sparkleTwinkle {
@@ -185,20 +185,41 @@
 }
 
 .result-name {
-  font-size: 4rem;
+  font-size: 8rem;
   font-weight: 800;
   margin: 0;
-  background: linear-gradient(to right, #ff4757, #ffa502, #2ed573, #1e90ff, #9b59b6);
+  background: linear-gradient(to right, #ff4757, #ffa502, #2ed573, #1e90ff, #9b59b6, #ff4757);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textShake 0.5s infinite;
+  animation: rainbowPan 3s linear infinite, textShake 0.5s infinite;
   display: inline-block;
+  position: relative;
+}
+
+.result-name::before, .result-name::after {
+  content: '✨';
+  position: absolute;
+  font-size: 3rem;
+  -webkit-text-fill-color: #ffd32a;
+  animation: sparkleTwinkle 1.2s infinite alternate-reverse;
+}
+
+.result-name::before {
+  top: -20px; right: -40px;
+}
+.result-name::after {
+  bottom: -20px; left: -40px;
+}
+
+@keyframes rainbowPan {
+  to { background-position: 200% center; }
 }
 
 @keyframes textShake {
   0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-2deg); }
-  75% { transform: rotate(2deg); }
+  25% { transform: rotate(-3deg) scale(1.05); }
+  75% { transform: rotate(3deg) scale(1.05); }
 }
 
 @keyframes popReveal {

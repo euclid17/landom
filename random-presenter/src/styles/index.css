@@ -22,9 +22,12 @@
 body {
   font-family: 'Jua', sans-serif;
   background-color: #87CEEB;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200" opacity="0.8"><path d="M 25 60 a 15 15 0 0 1 10 -25 a 20 20 0 0 1 35 0 a 15 15 0 0 1 10 25 z" fill="white"/></svg>'), linear-gradient(180deg, #87CEEB 0%, #E0F6FF 100%);
-  background-position: 0 0, 0 0;
-  background-size: 300px 300px, 100% 100%;
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M5,10 h6 v-1 h2 v-1 h1 v-3 h-1 v-1 h-2 v-1 h-1 v-1 h-4 v1 h-1 v-1 h-2 v1 h-1 v1 h-1 v3 h1 v1 h2 v1 z" fill="white" opacity="0.6"/></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12"><path d="M5,10 h6 v-1 h2 v-1 h1 v-3 h-1 v-1 h-2 v-1 h-1 v-1 h-4 v1 h-1 v-1 h-2 v1 h-1 v1 h-1 v3 h1 v1 h2 v1 z" fill="white" opacity="0.3"/></svg>');
+  background-size: 100px 75px, 60px 45px;
+  background-position: 0 0, 40px 40px;
+  image-rendering: pixelated;
   color: var(--text-primary);
   min-height: 100vh;
   display: flex;
