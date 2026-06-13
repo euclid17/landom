@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/gacha.css';
 
-const GachaMachine = ({ onExtract, isExtracting, currentResult }) => {
+const GachaMachine = ({ onExtract, onRedraw, isExtracting, currentResult }) => {
   const [turning, setTurning] = useState(false);
   const [dropping, setDropping] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -54,6 +54,11 @@ const GachaMachine = ({ onExtract, isExtracting, currentResult }) => {
       {showResult && currentResult && (
         <div className="result-reveal">
           <p className="result-name">{currentResult}</p>
+          {onRedraw && (
+            <button className="button-secondary" style={{ marginTop: 'var(--spacing-md)', fontSize: '18px', padding: '8px 20px' }} onClick={onRedraw}>
+              다시 뽑기 🔄
+            </button>
+          )}
         </div>
       )}
     </div>

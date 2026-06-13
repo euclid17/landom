@@ -54,7 +54,7 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleExtract = async () => {
+  const executeExtraction = (currentPickedList) => {
     if (students.length === 0) {
       alert('설정에서 학생 명단을 먼저 추가해주세요.');
       return;
@@ -62,7 +62,7 @@ function App() {
 
     if (isExtracting) return;
 
-    let availableStudents = students.filter(s => !pickedStudents.includes(s));
+    let availableStudents = students.filter(s => !currentPickedList.includes(s));
     
     if (availableStudents.length === 0) {
       alert('모든 학생이 뽑혔습니다. 명단을 초기화합니다.');
@@ -99,9 +99,30 @@ function App() {
       setIsExtracting(false);
       setCurrentResult(newPicks.join(', '));
       setRecentPicks(newPicks);
-      setPickedStudents(prev => [...prev, ...newPicks]);
+      setPickedStudents(prev => {
+        // Redraw 시에만 이전 기록이 삭제된 상태로 호출되지만, prev 기반 업데이트가 더 안전
+        const filteredPrev = prev.filter(p => !currentPickedList.includes(p) ? true : currentPickedList.includes(p)); 
+        // Simply use currentPickedList + newPicks
+        return [...currentPickedList, ...newPicks];
+      });
       setSecretOrder(updatedSecretOrder);
     }, 1800);
+  };
+
+  const handleExtract = () => {
+    executeExtraction(pickedStudents);
+  };
+
+  const handleRedraw = () => {
+    if (isExtracting) return;
+    const remainingPicks = pickedStudents.filter(s => !recentPicks.includes(s));
+    setPickedStudents(remainingPicks);
+    setRecentPicks([]);
+    setCurrentResult('');
+    // 약간의 딜레이 후 재추출 (UI 리셋을 위해)
+    setTimeout(() => {
+      executeExtraction(remainingPicks);
+    }, 100);
   };
 
   return (
@@ -153,6 +174,7 @@ function App() {
 
           <GachaMachine 
             onExtract={handleExtract} 
+            onRedraw={handleRedraw}
             isExtracting={isExtracting} 
             currentResult={currentResult} 
           />

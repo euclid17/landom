@@ -4,176 +4,220 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 400px;
+  min-height: 450px;
   width: 100%;
 }
 
-/* Minimalist Flat Gacha Machine */
+/* Cute Sanrio Gacha Machine */
 .machine-body {
-  width: 320px;
-  height: 400px;
-  background-color: var(--canvas);
-  border: 2px solid var(--hairline);
-  border-radius: var(--rounded-lg);
+  width: 340px;
+  height: 420px;
+  background-color: #ffb7b2; /* Baby Pink base */
+  border: 6px solid #fff;
+  border-radius: 60px 60px 40px 40px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: var(--spacing-xl);
   z-index: 2;
-  overflow: hidden;
+  box-shadow: inset -10px -10px 0px rgba(255,107,129,0.2), 0 12px 24px rgba(255, 183, 178, 0.5);
 }
 
+/* Glass Dome */
 .glass-dome {
-  width: 260px;
-  height: 200px;
-  background-color: var(--surface-soft);
-  border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
-  border: 1px solid var(--hairline);
+  width: 280px;
+  height: 220px;
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 50% 50% 10px 10px / 60% 60% 10px 10px;
+  border: 4px solid #fff;
   position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
   padding-bottom: var(--spacing-md);
-  gap: 8px;
+  gap: 6px;
+  box-shadow: inset 10px 10px 0px rgba(255,255,255,0.8);
+  overflow: hidden;
 }
 
+/* Cute Capsules */
 .capsule {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: var(--rounded-full);
-  background-color: var(--block-cream);
-  border: 1px solid var(--hairline);
+  background-color: #fff;
+  border: 3px solid #ff9eaa;
+  box-shadow: inset -4px -4px 0px rgba(0,0,0,0.05);
+  position: relative;
 }
 
-.capsule.red { background-color: var(--block-pink); }
-.capsule.yellow { background-color: var(--block-lime); }
-.capsule.purple { background-color: var(--block-lilac); }
+/* Bicolor capsules for cuteness */
+.capsule::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 50%;
+  background-color: inherit;
+  border-radius: 50px 50px 0 0;
+  border-bottom: 2px solid #ff9eaa;
+}
 
+.capsule.red { background-color: #ff9eaa; border-color: #ff6b81; }
+.capsule.red::after { background-color: #fff; border-bottom-color: #ff6b81; }
+
+.capsule.yellow { background-color: #fff3b0; border-color: #ffd166; }
+.capsule.yellow::after { background-color: #fff; border-bottom-color: #ffd166; }
+
+.capsule.purple { background-color: #c5b0f4; border-color: #9b5de5; }
+.capsule.purple::after { background-color: #fff; border-bottom-color: #9b5de5; }
+
+/* Heart Crank Container */
 .crank-container {
-  width: 64px;
-  height: 64px;
-  background-color: var(--surface-soft);
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
   border-radius: var(--rounded-full);
   margin-top: var(--spacing-lg);
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--hairline);
+  border: 4px solid #ff9eaa;
   position: relative;
   cursor: pointer;
+  box-shadow: inset -4px -4px 0px rgba(255,158,170,0.2);
 }
 
+/* Cute Heart shape on the crank */
 .crank {
-  width: 16px;
-  height: 40px;
-  background-color: var(--ink);
-  border-radius: var(--rounded-full);
+  width: 30px;
+  height: 30px;
+  background-color: #ff6b81;
   position: absolute;
-  top: 12px;
-  transform-origin: center center;
+  transform-origin: center;
   transition: transform 0.3s ease;
+  clip-path: path("M15,29.5 L15,29.5 C15,29.5 2.5,21 2.5,12.5 C2.5,7.5 6.5,3.5 11.5,3.5 C13.5,3.5 15,4.5 15,4.5 C15,4.5 16.5,3.5 18.5,3.5 C23.5,3.5 27.5,7.5 27.5,12.5 C27.5,21 15,29.5 15,29.5 Z");
 }
 
 .machine-body.turning .crank {
-  animation: turnFlatCrank 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  animation: turnHeart 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@keyframes turnFlatCrank {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(180deg); }
+@keyframes turnHeart {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(0.8); }
+  100% { transform: rotate(360deg) scale(1); }
 }
 
+/* Dispenser */
 .dispenser {
-  width: 80px;
-  height: 40px;
-  background-color: var(--surface-soft);
-  border-radius: var(--rounded-sm) var(--rounded-sm) 0 0;
-  border: 1px solid var(--hairline);
+  width: 90px;
+  height: 50px;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 45px 45px 0 0;
+  border: 4px solid #fff;
   border-bottom: none;
   position: absolute;
   bottom: 0;
+  box-shadow: inset 0 6px 12px rgba(0,0,0,0.05);
 }
 
 .capsule-drop {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: var(--rounded-full);
-  background-color: var(--block-lime);
-  border: 1px solid var(--hairline);
+  background-color: #ff9eaa;
+  border: 4px solid #fff;
   position: absolute;
   bottom: 40px;
   z-index: 3;
   opacity: 0;
+  box-shadow: 0 4px 12px rgba(255,107,129,0.4);
+}
+
+.capsule-drop::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 50%;
+  background-color: #fff;
+  border-radius: 64px 64px 0 0;
+  border-bottom: 3px solid #fff;
 }
 
 .machine-body.dropping .capsule-drop {
-  animation: dropCapsuleFlat 1.2s forwards cubic-bezier(0.25, 1, 0.5, 1);
+  animation: dropCapsuleCute 1.2s forwards cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@keyframes dropCapsuleFlat {
-  0% { transform: translateY(-40px) scale(0.5); opacity: 0; }
+@keyframes dropCapsuleCute {
+  0% { transform: translateY(-30px) scale(0.5); opacity: 0; }
   20% { transform: translateY(0) scale(1); opacity: 1; }
-  80% { transform: translateY(100px) scale(1.5); opacity: 1; }
-  100% { transform: translateY(100px) scale(2); opacity: 0; }
+  60% { transform: translateY(80px) scale(1.2); opacity: 1; }
+  80% { transform: translateY(60px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(120px) scale(1.5); opacity: 0; }
 }
 
+/* Result Reveal - Soft Cloud-like */
 .result-reveal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--block-lilac); /* Vibrant pastel block */
-  padding: var(--spacing-xxl);
-  border-radius: var(--rounded-lg);
+  background-color: #fff; 
+  padding: 40px 60px;
+  border-radius: 80px;
+  border: 6px solid #ffb7b2;
   z-index: 10;
   text-align: center;
   width: 100%;
-  max-width: 800px;
-  animation: popRevealFlat 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  max-width: 600px;
+  box-shadow: 0 16px 32px rgba(255, 183, 178, 0.6);
+  animation: popRevealCute 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
 }
 
 .result-name {
-  font-size: 86px; /* display-xl */
-  font-weight: 300; /* 340 approx */
-  line-height: 1.00;
-  letter-spacing: -1.72px;
-  color: var(--ink);
+  font-size: 80px; 
+  font-weight: 400;
+  color: #ff6b81;
   margin: 0;
   display: inline-block;
   position: relative;
+  text-shadow: 2px 2px 0 #fff, 4px 4px 0 #ffb7b2;
+  line-height: 1.1;
 }
 
-/* Subtle sparkle, not loud 3D ones */
+/* Cute sparkles */
 .result-name::before, .result-name::after {
-  content: '✨';
+  content: '🎀';
   position: absolute;
-  font-size: 2rem;
+  font-size: 2.5rem;
   opacity: 0;
-  animation: sparkleFlat 1.5s forwards 0.3s;
+  animation: sparkleCute 1.5s forwards 0.3s infinite alternate;
 }
 
-.result-name::before { top: -20px; right: -40px; }
-.result-name::after { bottom: -20px; left: -40px; }
+.result-name::before { top: -20px; right: -40px; transform: rotate(15deg); }
+.result-name::after { bottom: -20px; left: -40px; transform: rotate(-15deg); }
 
-@keyframes sparkleFlat {
-  0% { opacity: 0; transform: scale(0.5); }
-  50% { opacity: 1; transform: scale(1.2); }
-  100% { opacity: 0.8; transform: scale(1); }
+@keyframes sparkleCute {
+  0% { transform: scale(0.8) rotate(-10deg); }
+  100% { transform: scale(1.2) rotate(10deg); }
 }
 
-@keyframes popRevealFlat {
-  0% { transform: translate(-50%, -40%); opacity: 0; }
-  100% { transform: translate(-50%, -50%); opacity: 1; }
+@keyframes popRevealCute {
+  0% { transform: translate(-50%, -30%) scale(0.5); opacity: 0; }
+  70% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
-/* No 3D shake, just a subtle bounce for the machine */
+/* Soft bounce */
 .machine-body.turning {
-  animation: bounceFlat 0.5s infinite;
+  animation: bounceCute 0.4s infinite alternate;
 }
 
-@keyframes bounceFlat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+@keyframes bounceCute {
+  0% { transform: translateY(0) scaleY(1); }
+  100% { transform: translateY(-6px) scaleY(0.98); }
 }

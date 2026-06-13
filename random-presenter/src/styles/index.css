@@ -1,27 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 :root {
-  /* Colors */
-  --primary: #000000;
-  --on-primary: #ffffff;
-  --ink: #000000;
-  --canvas: #ffffff;
-  --inverse-canvas: #000000;
-  --inverse-ink: #ffffff;
-  --on-inverse-soft: rgba(255, 255, 255, 0.16);
-  --hairline: #e6e6e6;
-  --hairline-soft: #f1f1f1;
-  --surface-soft: #f7f7f5;
-  --block-lime: #dceeb1;
-  --block-lilac: #c5b0f4;
-  --block-cream: #f4ecd6;
-  --block-pink: #efd4d4;
-  --block-mint: #c8e6cd;
-  --block-coral: #f3c9b6;
-  --block-navy: #1f1d3d;
-  --accent-magenta: #ff3d8b;
-  --semantic-success: #1ea64a;
-  --overlay-scrim: rgba(0, 0, 0, 0.6);
+  /* Sanrio Colors */
+  --bg-gradient: linear-gradient(135deg, #ffd1dc 0%, #bde0fe 100%);
+  --surface-white: rgba(255, 255, 255, 0.85);
+  --surface-pink: #ffb7b2;
+  --surface-blue: #a2cffe;
+  --surface-yellow: #fff3b0;
+  
+  --ink: #4a4a4a; /* Soft dark gray instead of harsh black */
+  --text-secondary: #7a7a7a;
+  
+  --accent-magenta: #ff6b81;
+  --accent-pink: #ff9eaa;
+  
+  --hairline: #ffd1dc;
+  
+  /* Soft shadows */
+  --shadow-soft: 0 8px 24px rgba(255, 183, 178, 0.4);
+  --shadow-button: 0 4px 0 #ff9eaa;
+  --shadow-button-active: 0 0px 0 #ff9eaa;
 
   /* Spacing */
   --spacing-hair: 1px;
@@ -35,17 +33,12 @@
   --spacing-section: 96px;
 
   /* Rounded */
-  --rounded-xs: 2px;
-  --rounded-sm: 6px;
-  --rounded-md: 8px;
-  --rounded-lg: 24px;
-  --rounded-xl: 32px;
+  --rounded-md: 16px;
+  --rounded-lg: 32px;
   --rounded-pill: 50px;
   --rounded-full: 9999px;
 
-  /* Typography */
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-cute: 'Jua', sans-serif;
 }
 
 * {
@@ -55,92 +48,90 @@
 }
 
 body {
-  font-family: var(--font-sans);
-  background: var(--canvas);
+  font-family: var(--font-cute);
+  background: var(--bg-gradient);
   color: var(--ink);
   min-height: 100vh;
-  /* Adjusting global tracking slightly to mimic figmaSans if needed, but we do it on specific classes */
 }
 
 /* Typography Classes */
-.display-xl { font-size: 86px; font-weight: 300; line-height: 1.00; letter-spacing: -1.72px; }
-.display-lg { font-size: 64px; font-weight: 300; line-height: 1.10; letter-spacing: -0.96px; }
-.headline { font-size: 26px; font-weight: 500; line-height: 1.35; letter-spacing: -0.26px; }
-.subhead { font-size: 26px; font-weight: 300; line-height: 1.35; letter-spacing: -0.26px; }
-.card-title { font-size: 24px; font-weight: 700; line-height: 1.45; letter-spacing: 0; }
-.body-lg { font-size: 20px; font-weight: 300; line-height: 1.40; letter-spacing: -0.14px; }
-.body { font-size: 18px; font-weight: 300; line-height: 1.45; letter-spacing: -0.26px; }
-.body-sm { font-size: 16px; font-weight: 300; line-height: 1.45; letter-spacing: -0.14px; }
-.link { font-size: 20px; font-weight: 500; line-height: 1.40; letter-spacing: -0.10px; text-decoration: none; cursor: pointer; }
-.eyebrow { font-family: var(--font-mono); font-size: 18px; font-weight: 400; line-height: 1.30; letter-spacing: 0.54px; text-transform: uppercase; }
-.caption { font-family: var(--font-mono); font-size: 12px; font-weight: 400; line-height: 1.00; letter-spacing: 0.60px; text-transform: uppercase; }
+.display-xl { font-size: 86px; font-weight: 400; line-height: 1.1; }
+.display-lg { font-size: 48px; font-weight: 400; line-height: 1.2; text-shadow: 2px 2px 0px #fff; }
+.headline { font-size: 28px; font-weight: 400; line-height: 1.35; }
+.subhead { font-size: 24px; font-weight: 400; line-height: 1.35; }
+.card-title { font-size: 22px; font-weight: 400; line-height: 1.45; }
+.body-lg { font-size: 22px; font-weight: 400; line-height: 1.40; }
+.body { font-size: 18px; font-weight: 400; line-height: 1.45; }
+.body-sm { font-size: 16px; font-weight: 400; line-height: 1.45; }
+.eyebrow { font-size: 18px; font-weight: 400; line-height: 1.30; color: var(--accent-magenta); }
+.caption { font-size: 14px; font-weight: 400; line-height: 1.00; }
 
-/* Buttons */
+/* Cute Buttons */
 button {
-  font-family: var(--font-sans);
-  border: none;
+  font-family: var(--font-cute);
+  border: 2px solid #fff;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.1s ease;
+  transition: all 0.2s ease;
   font-size: 20px; 
-  font-weight: 500; 
-  line-height: 1.40; 
-  letter-spacing: -0.10px;
+  font-weight: 400; 
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: translateY(4px);
+  box-shadow: var(--shadow-button-active) !important;
 }
 
 .button-primary {
-  background-color: var(--primary);
-  color: var(--on-primary);
+  background-color: var(--surface-pink);
+  color: #fff;
   border-radius: var(--rounded-pill);
-  padding: 10px 20px;
+  padding: 12px 24px;
+  box-shadow: var(--shadow-button);
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
 }
 
 .button-secondary {
-  background-color: var(--canvas);
-  color: var(--ink);
+  background-color: var(--surface-white);
+  color: var(--accent-magenta);
   border-radius: var(--rounded-pill);
-  padding: 8px 18px 10px;
-  border: var(--spacing-hair) solid var(--hairline); /* Added slight border to be visible on white if needed, but figma spec says no border if on color block. We will override it or use surface-soft if on canvas */
+  padding: 12px 24px;
+  box-shadow: 0 4px 0 rgba(255,255,255,0.8);
 }
 
-/* Let's follow spec exactly: secondary has no border if on color blocks, but we can add a tiny drop shadow or hairline if needed. Actually spec says "No border." */
-.button-secondary.no-border {
-  border: none;
+.button-secondary:active {
+  box-shadow: 0 0px 0 rgba(255,255,255,0.8) !important;
 }
 
 .button-icon-circular {
-  background-color: var(--surface-soft);
-  color: var(--ink);
+  background-color: var(--surface-white);
+  color: var(--accent-magenta);
   border-radius: var(--rounded-full);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  box-shadow: 0 4px 0 rgba(255,255,255,0.8);
 }
 
 /* Inputs */
 input[type="text"], input[type="number"], textarea, select {
-  font-family: var(--font-sans);
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 1.45;
-  letter-spacing: -0.26px;
-  background-color: var(--canvas);
+  font-family: var(--font-cute);
+  font-size: 20px;
+  background-color: var(--surface-white);
   color: var(--ink);
   border-radius: var(--rounded-md);
-  border: 1px solid var(--hairline);
-  padding: 12px 14px;
+  border: 3px solid #fff;
+  padding: 12px 16px;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: var(--ink);
+  border-color: var(--accent-pink);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05), 0 0 0 4px rgba(255, 183, 178, 0.4);
 }
 
 /* Layout Utilities */
@@ -152,69 +143,54 @@ input:focus, textarea:focus, select:focus {
   padding-bottom: var(--spacing-section);
 }
 
-/* Nav */
 .top-nav {
   width: 100%;
   max-width: 1280px;
-  height: 56px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 var(--spacing-xl);
-  background-color: var(--canvas);
-  margin-bottom: var(--spacing-xxl);
+  margin-bottom: var(--spacing-lg);
 }
 
-/* Color Blocks */
+/* Cute Blocks */
 .color-block-section {
-  width: 100%;
-  max-width: 1280px;
-  background-color: var(--block-lime);
+  width: 95%;
+  max-width: 1000px;
+  background-color: var(--surface-white);
   color: var(--ink);
   border-radius: var(--rounded-lg);
   padding: var(--spacing-xxl);
-  margin: var(--spacing-section) 0;
+  margin: var(--spacing-lg) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: var(--shadow-soft);
+  border: 4px solid #fff;
 }
 
-.color-block-section.lilac { background-color: var(--block-lilac); }
-.color-block-section.cream { background-color: var(--block-cream); }
-.color-block-section.navy { background-color: var(--block-navy); color: var(--inverse-ink); }
+.color-block-section.cream { background-color: #fff9e6; }
+.color-block-section.lime { background-color: #e0f8d1; }
 
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  gap: var(--spacing-md);
-}
+.flex-col { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.flex-row { display: flex; flex-direction: row; gap: var(--spacing-md); }
 
 /* Modals */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: var(--overlay-scrim);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(255, 183, 178, 0.3);
+  backdrop-filter: blur(8px);
+  display: flex; justify-content: center; align-items: center;
   z-index: 1000;
 }
 
 .template-card {
-  background-color: var(--canvas);
+  background-color: var(--surface-white);
   border-radius: var(--rounded-lg);
   padding: var(--spacing-xxl);
-  width: 90%;
-  max-width: 600px;
-  border: 1px solid var(--hairline);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06); /* Level 2 elevation for modal */
+  width: 90%; max-width: 500px;
+  border: 4px solid #fff;
+  box-shadow: var(--shadow-soft);
 }
