@@ -179,31 +179,42 @@
 }
 
 .result-name {
-  font-size: 80px; 
+  font-size: 140px; 
   font-weight: 400;
-  color: #ff6b81;
   margin: 0;
   display: inline-block;
   position: relative;
-  text-shadow: 2px 2px 0 #fff, 4px 4px 0 #ffb7b2;
-  line-height: 1.1;
+  line-height: 1.2;
+  background: linear-gradient(to right, #ff4757, #ffa502, #2ed573, #1e90ff, #9b59b6, #ff4757);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowPan 3s linear infinite;
+  filter: drop-shadow(3px 3px 0px #fff) drop-shadow(6px 6px 0px #ffb7b2);
+}
+
+@keyframes rainbowPan {
+  to { background-position: 200% center; }
 }
 
 /* Cute sparkles */
 .result-name::before, .result-name::after {
   content: '✨🎀✨';
   position: absolute;
-  font-size: 3rem;
+  font-size: 5rem;
   opacity: 0;
-  animation: sparkleCute 1.5s forwards 0.3s infinite alternate;
+  -webkit-text-fill-color: initial; /* Prevents text-clip from hiding the emoji */
+  color: initial;
+  animation: sparkleCute 1s forwards 0.3s infinite alternate;
+  z-index: 20;
 }
 
-.result-name::before { top: -30px; right: -50px; transform: rotate(15deg); }
-.result-name::after { bottom: -30px; left: -50px; transform: rotate(-15deg); }
+.result-name::before { top: -60px; right: -100px; transform: rotate(15deg); }
+.result-name::after { bottom: -60px; left: -100px; transform: rotate(-15deg); }
 
 @keyframes sparkleCute {
-  0% { transform: scale(0.8) rotate(-10deg); }
-  100% { transform: scale(1.2) rotate(10deg); }
+  0% { transform: scale(0.8) rotate(-10deg); opacity: 0.5; }
+  100% { transform: scale(1.5) rotate(10deg); opacity: 1; }
 }
 
 @keyframes popRevealCute {
