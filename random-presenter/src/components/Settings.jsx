@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-const Settings = ({ students, setStudents, setPickedStudents, onClose }) => {
+const Settings = ({ students, setStudents, setPickedStudents }) => {
   const [inputText, setInputText] = useState('');
 
   const handleAddStudents = () => {
     if (!inputText.trim()) return;
     
-    // Split by comma, newline, or space
     const newNames = inputText
       .split(/[\n, ]+/)
       .map(name => name.trim())
@@ -36,31 +35,31 @@ const Settings = ({ students, setStudents, setPickedStudents, onClose }) => {
   };
 
   return (
-    <div className="glass-panel" style={{ width: '100%', maxWidth: '600px', margin: '0 auto' }}>
-      <h2>학생 명단 관리</h2>
+    <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto', textAlign: 'left' }}>
+      <h2 className="display-lg" style={{ marginBottom: 'var(--spacing-lg)' }}>학생 명단 관리</h2>
       
-      <div className="flex-col" style={{ marginBottom: '2rem' }}>
+      <div className="flex-col" style={{ marginBottom: 'var(--spacing-xl)' }}>
+        <p className="body">학생 이름을 입력하세요. 여러 명일 경우 쉼표(,), 줄바꿈, 띄어쓰기로 구분합니다.</p>
         <textarea 
           rows={4} 
-          placeholder="학생 이름을 입력하세요. 여러 명일 경우 쉼표(,) 줄바꿈, 띄어쓰기로 구분합니다."
+          placeholder="예: 김철수, 이영희, 홍길동"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <div className="flex-row" style={{ justifyContent: 'flex-end' }}>
-          <button onClick={handleAddStudents}>추가하기</button>
+        <div className="flex-row" style={{ justifyContent: 'flex-start' }}>
+          <button className="button-primary" onClick={handleAddStudents}>추가하기</button>
         </div>
       </div>
 
-      <div style={{ marginBottom: '2rem' }}>
-        <h3>현재 명단 ({students.length}명)</h3>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', maxHeight: '200px', overflowY: 'auto', padding: '1rem', background: 'rgba(255,255,255,0.3)', borderRadius: '12px' }}>
-          {students.length === 0 ? <p style={{color: '#666'}}>명단이 비어있습니다.</p> : null}
+      <div style={{ marginBottom: 'var(--spacing-xl)' }}>
+        <h3 className="headline" style={{ marginBottom: 'var(--spacing-sm)' }}>현재 명단 ({students.length}명)</h3>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-xs)', maxHeight: '200px', overflowY: 'auto', padding: 'var(--spacing-md)', backgroundColor: 'var(--canvas)', borderRadius: 'var(--rounded-md)', border: '1px solid var(--hairline)' }}>
+          {students.length === 0 ? <p className="body-sm" style={{color: 'var(--text-secondary)'}}>명단이 비어있습니다.</p> : null}
           {students.map((student, index) => (
-            <div key={index} style={{ background: 'white', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
-              <span>{student}</span>
+            <div key={index} style={{ backgroundColor: 'var(--surface-soft)', padding: '4px 12px', borderRadius: 'var(--rounded-full)', display: 'flex', alignItems: 'center', gap: 'var(--spacing-xs)', border: '1px solid var(--hairline)' }}>
+              <span className="body-sm">{student}</span>
               <button 
-                className="danger" 
-                style={{ padding: '0.2rem 0.5rem', fontSize: '0.8rem', borderRadius: '50%' }}
+                style={{ background: 'none', color: 'var(--ink)', padding: '0', fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 onClick={() => handleRemoveStudent(student)}
               >
                 &times;
@@ -71,15 +70,11 @@ const Settings = ({ students, setStudents, setPickedStudents, onClose }) => {
       </div>
 
       <div className="flex-col">
-        <h3>초기화 설정</h3>
+        <h3 className="headline" style={{ marginBottom: 'var(--spacing-sm)' }}>초기화 설정</h3>
         <div className="flex-row">
-          <button className="secondary" onClick={handleResetPicked}>뽑힌 학생 기록 초기화</button>
-          <button className="danger" onClick={handleClearAll}>전체 명단 삭제</button>
+          <button className="button-secondary" style={{ border: '1px solid var(--hairline)' }} onClick={handleResetPicked}>뽑힌 학생 기록 초기화</button>
+          <button className="button-secondary" style={{ color: 'var(--accent-magenta)', border: '1px solid var(--accent-magenta)' }} onClick={handleClearAll}>전체 명단 삭제</button>
         </div>
-      </div>
-
-      <div className="flex-center" style={{ marginTop: '2rem' }}>
-        <button onClick={onClose} style={{ width: '100%' }}>완료 및 돌아가기</button>
       </div>
     </div>
   );

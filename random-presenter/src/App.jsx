@@ -18,10 +18,8 @@ function App() {
   const [isExtracting, setIsExtracting] = useState(false);
   const [currentResult, setCurrentResult] = useState('');
   
-  // Results array for displaying multiple picks
   const [recentPicks, setRecentPicks] = useState([]);
 
-  // Load initial data
   useEffect(() => {
     setStudents(storage.getStudents());
     setSecretOrder(storage.getSecretOrder());
@@ -29,7 +27,6 @@ function App() {
     setTitle(storage.getTitle());
   }, []);
 
-  // Save data on change
   useEffect(() => {
     storage.saveStudents(students);
   }, [students]);
@@ -46,7 +43,6 @@ function App() {
     storage.savePickedStudents(pickedStudents);
   }, [pickedStudents]);
 
-  // Hotkey listener for secret modal (Shift + A)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.shiftKey && (e.key === 'a' || e.key === 'A') && !e.ctrlKey && !e.altKey) {
@@ -68,14 +64,12 @@ function App() {
 
     let availableStudents = students.filter(s => !pickedStudents.includes(s));
     
-    // Auto reset if everyone is picked
     if (availableStudents.length === 0) {
       alert('모든 학생이 뽑혔습니다. 명단을 초기화합니다.');
       setPickedStudents([]);
       availableStudents = [...students];
     }
 
-    // Determine who to pick
     const newPicks = [];
     let updatedSecretOrder = [...secretOrder];
     let currentAvailable = [...availableStudents];
@@ -85,13 +79,11 @@ function App() {
 
       let pickedStudent = '';
 
-      // 1. Check secret order
       const nextSecret = updatedSecretOrder[0];
       if (nextSecret && currentAvailable.includes(nextSecret)) {
         pickedStudent = nextSecret;
-        updatedSecretOrder.shift(); // Remove from secret queue
+        updatedSecretOrder.shift();
       } else {
-        // 2. Random pick
         const randomIndex = Math.floor(Math.random() * currentAvailable.length);
         pickedStudent = currentAvailable[randomIndex];
       }
@@ -100,50 +92,54 @@ function App() {
       currentAvailable = currentAvailable.filter(s => s !== pickedStudent);
     }
 
-    // Animation & State Updates
     setIsExtracting(true);
-    setCurrentResult(''); // Hide previous result
+    setCurrentResult('');
 
-    // Simulate gacha animation wait
     setTimeout(() => {
       setIsExtracting(false);
       setCurrentResult(newPicks.join(', '));
       setRecentPicks(newPicks);
       setPickedStudents(prev => [...prev, ...newPicks]);
       setSecretOrder(updatedSecretOrder);
-    }, 2500); // 2.5s for the animation to complete
+    }, 1800);
   };
 
   return (
     <div className="app-container">
-      {view === 'main' ? (
-        <div className="flex-col" style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
-          <div style={{ position: 'absolute', top: '2rem', right: '2rem' }}>
-            <button className="secondary" onClick={() => setView('settings')}>명단 설정</button>
-          </div>
+      {/* Top Nav (Monochrome Chrome) */}
+      <header className="top-nav">
+        <div style={{ fontWeight: 600, fontSize: '20px', letterSpacing: '-0.5px' }}>Figma-style Picker</div>
+        <div>
+          {view === 'main' ? (
+            <button className="button-secondary" onClick={() => setView('settings')}>명단 설정</button>
+          ) : (
+            <button className="button-primary" onClick={() => setView('main')}>완료 및 돌아가기</button>
+          )}
+        </div>
+      </header>
 
+      {/* Main Content Area */}
+      {view === 'main' ? (
+        <main className="color-block-section lime" style={{ minHeight: '600px' }}>
           <input 
             type="text"
+            className="display-lg"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             style={{ 
-              fontSize: '3rem', 
-              fontWeight: '800', 
-              textAlign: 'center', 
-              marginBottom: '2rem', 
-              textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
               background: 'transparent',
               border: 'none',
               outline: 'none',
-              fontFamily: 'inherit',
               color: 'inherit',
+              textAlign: 'center',
               width: '100%',
-              padding: '0'
+              marginBottom: 'var(--spacing-xl)',
+              fontFamily: 'inherit'
             }}
           />
 
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', alignItems: 'center', background: 'var(--glass-bg)', padding: '1rem 2rem', borderRadius: '20px', boxShadow: 'var(--glass-shadow)' }}>
-            <span style={{ fontWeight: '600' }}>추출 인원:</span>
+          <div className="flex-row" style={{ alignItems: 'center', marginBottom: 'var(--spacing-xl)' }}>
+            <span className="body-lg" style={{ fontWeight: 500 }}>추출 인원:</span>
             <input 
               type="number" 
               min="1" 
@@ -152,7 +148,7 @@ function App() {
               onChange={(e) => setExtractCount(Math.max(1, parseInt(e.target.value) || 1))}
               style={{ width: '80px', textAlign: 'center' }}
             />
-            <span>명</span>
+            <span className="body-lg" style={{ fontWeight: 500 }}>명</span>
           </div>
 
           <GachaMachine 
@@ -162,26 +158,32 @@ function App() {
           />
 
           {recentPicks.length > 0 && !isExtracting && (
-            <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-              <h3>🎉 이번에 뽑힌 발표자 🎉</h3>
-              <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--button-bg)' }}>
+            <div style={{ marginTop: 'var(--spacing-xl)', textAlign: 'center' }}>
+              <p className="eyebrow" style={{ marginBottom: 'var(--spacing-xs)', color: 'var(--ink)' }}>🎉 이번에 뽑힌 발표자 🎉</p>
+              <p className="headline" style={{ color: 'var(--primary)' }}>
                 {recentPicks.join(', ')}
               </p>
             </div>
           )}
 
-          <div style={{ marginTop: '2rem', color: 'var(--text-secondary)' }}>
+          <div className="caption" style={{ marginTop: 'var(--spacing-xxl)', color: 'var(--ink)', opacity: 0.7 }}>
             전체: {students.length}명 / 남은 인원: {students.length - pickedStudents.length}명
           </div>
-        </div>
+        </main>
       ) : (
-        <Settings 
-          students={students} 
-          setStudents={setStudents}
-          setPickedStudents={setPickedStudents}
-          onClose={() => setView('main')} 
-        />
+        <main className="color-block-section cream">
+          <Settings 
+            students={students} 
+            setStudents={setStudents}
+            setPickedStudents={setPickedStudents}
+          />
+        </main>
       )}
+
+      {/* Footer (Monochrome) */}
+      <footer style={{ width: '100%', maxWidth: '1280px', padding: 'var(--spacing-section) var(--spacing-xl)', textAlign: 'left' }}>
+        <p className="caption" style={{ color: 'var(--ink)' }}>Press Shift + A to open secret menu</p>
+      </footer>
 
       <SecretModal 
         isOpen={isSecretModalOpen} 

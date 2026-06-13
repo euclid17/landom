@@ -4,244 +4,176 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 450px;
-  perspective: 1000px;
+  min-height: 400px;
+  width: 100%;
 }
 
+/* Minimalist Flat Gacha Machine */
 .machine-body {
-  width: 260px;
-  height: 360px;
-  background: linear-gradient(135deg, #fcd5ce 0%, #f8ad9d 100%); /* Pastel peach/pink */
-  border-radius: 30px 30px 15px 15px;
-  border: 4px solid #fff;
-  box-shadow: 
-    inset -10px -10px 20px rgba(0,0,0,0.1), 
-    inset 10px 10px 20px rgba(255,255,255,0.8),
-    10px 20px 30px rgba(0,0,0,0.15),
-    -5px 5px 15px rgba(0,0,0,0.05);
+  width: 320px;
+  height: 400px;
+  background-color: var(--canvas);
+  border: 2px solid var(--hairline);
+  border-radius: var(--rounded-lg);
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 25px;
+  padding-top: var(--spacing-xl);
   z-index: 2;
-  transform-style: preserve-3d;
+  overflow: hidden;
 }
 
 .glass-dome {
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.2) 60%, rgba(255,255,255,0.4) 100%);
-  border: 4px solid rgba(255, 255, 255, 0.9);
-  border-radius: 50% 50% 15px 15px;
-  box-shadow: 
-    inset -10px -10px 30px rgba(0,0,0,0.1),
-    inset 10px 10px 30px rgba(255,255,255,0.9),
-    0 10px 20px rgba(0,0,0,0.1);
+  width: 260px;
+  height: 200px;
+  background-color: var(--surface-soft);
+  border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
+  border: 1px solid var(--hairline);
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 15px;
+  padding-bottom: var(--spacing-md);
   gap: 8px;
-  transform: translateZ(20px);
 }
 
 .capsule {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #a2d2ff, #bde0fe); /* Pastel blue */
-  box-shadow: 
-    inset -5px -5px 10px rgba(0,0,0,0.15), 
-    inset 5px 5px 10px rgba(255,255,255,0.8),
-    2px 5px 10px rgba(0,0,0,0.1);
-  border: 2px solid rgba(255,255,255,0.6);
-  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--rounded-full);
+  background-color: var(--block-cream);
+  border: 1px solid var(--hairline);
 }
 
-.capsule.red { background: radial-gradient(circle at 30% 30%, #ffb4a2, #ffcdb2); } /* Pastel red/peach */
-.capsule.yellow { background: radial-gradient(circle at 30% 30%, #fefae0, #faedcb); } /* Pastel yellow */
-.capsule.purple { background: radial-gradient(circle at 30% 30%, #c8b6ff, #e7c6ff); } /* Pastel purple */
+.capsule.red { background-color: var(--block-pink); }
+.capsule.yellow { background-color: var(--block-lime); }
+.capsule.purple { background-color: var(--block-lilac); }
 
 .crank-container {
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle at 30% 30%, #fff, #e0e0e0);
-  border-radius: 50%;
-  margin-top: 20px;
+  width: 64px;
+  height: 64px;
+  background-color: var(--surface-soft);
+  border-radius: var(--rounded-full);
+  margin-top: var(--spacing-lg);
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 
-    inset -5px -5px 10px rgba(0,0,0,0.1),
-    0 10px 15px rgba(0,0,0,0.1);
-  border: 4px solid #fff;
+  border: 1px solid var(--hairline);
   position: relative;
-  transform: translateZ(30px);
+  cursor: pointer;
 }
 
 .crank {
-  width: 20px;
-  height: 50px;
-  background: radial-gradient(circle at center, #ffd6a5, #fdffb6); /* Pastel accent */
-  border-radius: 10px;
+  width: 16px;
+  height: 40px;
+  background-color: var(--ink);
+  border-radius: var(--rounded-full);
   position: absolute;
-  top: 5px;
-  transform-origin: top center;
-  transition: transform 0.5s ease;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-  border: 2px solid #fff;
+  top: 12px;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
 }
 
 .machine-body.turning .crank {
-  animation: pullDownCrank 1s ease-in-out;
+  animation: turnFlatCrank 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@keyframes pullDownCrank {
+@keyframes turnFlatCrank {
   0% { transform: rotate(0deg); }
-  50% { transform: rotate(45deg); }
-  100% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
 }
 
 .dispenser {
-  width: 70px;
-  height: 50px;
-  background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
-  border-radius: 10px 10px 0 0;
+  width: 80px;
+  height: 40px;
+  background-color: var(--surface-soft);
+  border-radius: var(--rounded-sm) var(--rounded-sm) 0 0;
+  border: 1px solid var(--hairline);
+  border-bottom: none;
   position: absolute;
   bottom: 0;
-  box-shadow: inset 0 10px 15px rgba(0,0,0,0.3);
-  border: 3px solid #fff;
-  border-bottom: none;
 }
 
 .capsule-drop {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffd6a5, #ffadad);
-  box-shadow: 
-    inset -5px -5px 15px rgba(0,0,0,0.2), 
-    inset 5px 5px 15px rgba(255,255,255,0.9),
-    0 10px 20px rgba(0,0,0,0.2);
+  width: 60px;
+  height: 60px;
+  border-radius: var(--rounded-full);
+  background-color: var(--block-lime);
+  border: 1px solid var(--hairline);
   position: absolute;
   bottom: 40px;
   z-index: 3;
   opacity: 0;
-  transform: translateZ(40px);
 }
 
 .machine-body.dropping .capsule-drop {
-  animation: dropCapsule 1.5s forwards;
+  animation: dropCapsuleFlat 1.2s forwards cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@keyframes dropCapsule {
-  0% { transform: translateY(-50px) scale(0.5) translateZ(40px); opacity: 0; }
-  30% { transform: translateY(0) scale(1) translateZ(40px); opacity: 1; }
-  70% { transform: translateY(120px) scale(1.5) translateZ(50px); opacity: 1; }
-  100% { transform: translateY(120px) scale(2) translateZ(50px); opacity: 0; }
+@keyframes dropCapsuleFlat {
+  0% { transform: translateY(-40px) scale(0.5); opacity: 0; }
+  20% { transform: translateY(0) scale(1); opacity: 1; }
+  80% { transform: translateY(100px) scale(1.5); opacity: 1; }
+  100% { transform: translateY(100px) scale(2); opacity: 0; }
 }
 
 .result-reveal {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateZ(100px);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2.5rem 5rem;
-  border-radius: 30px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.2), inset 0 0 0 4px #ffc6ff;
+  transform: translate(-50%, -50%);
+  background-color: var(--block-lilac); /* Vibrant pastel block */
+  padding: var(--spacing-xxl);
+  border-radius: var(--rounded-lg);
   z-index: 10;
   text-align: center;
-  animation: popReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, floatSparkle 2s infinite ease-in-out;
-  backdrop-filter: blur(10px);
-}
-
-.result-reveal::before, .result-reveal::after {
-  content: '✨';
-  position: absolute;
-  font-size: 4rem;
-  animation: sparkleTwinkle 1s infinite alternate;
-}
-
-.result-reveal::before {
-  top: -30px; left: -30px;
-}
-.result-reveal::after {
-  bottom: -30px; right: -30px;
-}
-
-@keyframes sparkleTwinkle {
-  0% { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
-  100% { transform: scale(1.2) rotate(20deg); opacity: 1; }
-}
-
-@keyframes floatSparkle {
-  0%, 100% { transform: translate(-50%, -50%) translateZ(100px) translateY(0); }
-  50% { transform: translate(-50%, -50%) translateZ(100px) translateY(-10px); }
+  width: 100%;
+  max-width: 800px;
+  animation: popRevealFlat 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .result-name {
-  font-size: 8rem;
-  font-weight: 800;
+  font-size: 86px; /* display-xl */
+  font-weight: 300; /* 340 approx */
+  line-height: 1.00;
+  letter-spacing: -1.72px;
+  color: var(--ink);
   margin: 0;
-  background: linear-gradient(to right, #ff4757, #ffa502, #2ed573, #1e90ff, #9b59b6, #ff4757);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rainbowPan 3s linear infinite, textShake 0.5s infinite;
   display: inline-block;
   position: relative;
 }
 
+/* Subtle sparkle, not loud 3D ones */
 .result-name::before, .result-name::after {
   content: '✨';
   position: absolute;
-  font-size: 3rem;
-  -webkit-text-fill-color: #ffd32a;
-  animation: sparkleTwinkle 1.2s infinite alternate-reverse;
+  font-size: 2rem;
+  opacity: 0;
+  animation: sparkleFlat 1.5s forwards 0.3s;
 }
 
-.result-name::before {
-  top: -20px; right: -40px;
-}
-.result-name::after {
-  bottom: -20px; left: -40px;
+.result-name::before { top: -20px; right: -40px; }
+.result-name::after { bottom: -20px; left: -40px; }
+
+@keyframes sparkleFlat {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.8; transform: scale(1); }
 }
 
-@keyframes rainbowPan {
-  to { background-position: 200% center; }
+@keyframes popRevealFlat {
+  0% { transform: translate(-50%, -40%); opacity: 0; }
+  100% { transform: translate(-50%, -50%); opacity: 1; }
 }
 
-@keyframes textShake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-3deg) scale(1.05); }
-  75% { transform: rotate(3deg) scale(1.05); }
-}
-
-@keyframes popReveal {
-  0% { transform: translate(-50%, -50%) scale(0.5) translateZ(100px); opacity: 0; }
-  100% { transform: translate(-50%, -50%) scale(1) translateZ(100px); opacity: 1; }
-}
-
-/* Shake animation */
+/* No 3D shake, just a subtle bounce for the machine */
 .machine-body.turning {
-  animation: shake3d 0.5s infinite;
+  animation: bounceFlat 0.5s infinite;
 }
 
-@keyframes shake3d {
-  0% { transform: translate(1px, 1px) rotate(0deg) rotateY(1deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg) rotateY(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg) rotateY(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg) rotateY(-1deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg) rotateY(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg) rotateY(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg) rotateY(1deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg) rotateY(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg) rotateY(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg) rotateY(-1deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg) rotateY(1deg); }
+@keyframes bounceFlat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
