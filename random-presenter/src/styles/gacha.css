@@ -170,7 +170,6 @@
   text-align: center;
   width: auto;
   max-width: 95%;
-  overflow: hidden;
   box-shadow: 0 16px 32px rgba(255, 183, 178, 0.6);
   animation: popRevealCute 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   display: flex;
@@ -201,20 +200,20 @@
 .result-name::before, .result-name::after {
   content: '✨🎀✨';
   position: absolute;
-  font-size: 5rem;
+  font-size: 2.5rem;
   opacity: 0;
   -webkit-text-fill-color: initial; /* Prevents text-clip from hiding the emoji */
   color: initial;
-  animation: sparkleCute 1s forwards 0.3s infinite alternate;
+  animation: sparkleCute 1.2s forwards 0.3s infinite alternate;
   z-index: -1;
 }
 
-.result-name::before { top: -80px; right: -120px; transform: rotate(15deg); }
-.result-name::after { bottom: -80px; left: -120px; transform: rotate(-15deg); }
+.result-name::before { top: -40px; right: -60px; transform: rotate(15deg); }
+.result-name::after { bottom: -40px; left: -60px; transform: rotate(-15deg); }
 
 @keyframes sparkleCute {
-  0% { transform: scale(0.8) rotate(-10deg); opacity: 0.5; }
-  100% { transform: scale(1.5) rotate(10deg); opacity: 1; }
+  0% { transform: scale(0.8) rotate(-10deg); opacity: 0.6; }
+  100% { transform: scale(1.1) rotate(10deg); opacity: 1; }
 }
 
 @keyframes popRevealCute {

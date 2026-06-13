@@ -54,7 +54,7 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const executeExtraction = (currentPickedList, excludedPicks = []) => {
+  const executeExtraction = (initialPickedList, excludedPicks = []) => {
     if (students.length === 0) {
       alert('설정에서 학생 명단을 먼저 추가해주세요.');
       return;
@@ -62,16 +62,25 @@ function App() {
 
     if (isExtracting) return;
 
+    let currentPickedList = [...initialPickedList];
     let availableStudents = students.filter(s => !currentPickedList.includes(s));
     
     if (availableStudents.length === 0) {
-      alert('모든 학생이 뽑혔습니다. 명단을 초기화합니다.');
-      setPickedStudents([]);
+      currentPickedList = [];
       availableStudents = [...students];
     }
 
     let currentAvailable = availableStudents.filter(s => !excludedPicks.includes(s));
-    if (currentAvailable.length === 0) {
+    
+    if (currentAvailable.length === 0 && excludedPicks.length > 0) {
+      currentPickedList = [];
+      availableStudents = [...students];
+      currentAvailable = availableStudents.filter(s => !excludedPicks.includes(s));
+      
+      if (currentAvailable.length === 0) {
+        currentAvailable = [...availableStudents];
+      }
+    } else if (currentAvailable.length === 0) {
       currentAvailable = [...availableStudents];
     }
 
