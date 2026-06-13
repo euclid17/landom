@@ -128,14 +128,16 @@ function App() {
 
   const handleRedraw = () => {
     if (isExtracting) return;
-    const remainingPicks = pickedStudents.filter(s => !recentPicks.includes(s));
-    const excluded = [...recentPicks];
-    setPickedStudents(remainingPicks);
+    
+    // 다시 뽑기 시, 방금 나온 사람들은 '건너뛰기(결석 등)' 처리된 것으로 간주하여
+    // pickedStudents(뽑힌 명단)에 그대로 둡니다. 
+    // 이렇게 하면 남은 인원 수에서 정상적으로 차감되고, 영구적으로 다시 뽑히지 않습니다.
     setRecentPicks([]);
     setCurrentResult('');
-    // 약간의 딜레이 후 재추출 (UI 리셋을 위해)
+    
+    // 약간의 딜레이 후 재추출 (기존에 뽑힌 사람들을 제외하고 새롭게 뽑음)
     setTimeout(() => {
-      executeExtraction(remainingPicks, excluded);
+      executeExtraction(pickedStudents, []);
     }, 100);
   };
 
