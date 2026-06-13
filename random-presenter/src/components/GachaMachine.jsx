@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { playTadaSound } from '../utils/sound';
 import '../styles/gacha.css';
 
-const GachaMachine = ({ onExtract, onRedraw, isExtracting, currentResult }) => {
+const GachaMachine = ({ onExtract, onRedraw, isExtracting, currentResult, extractCount, setExtractCount, maxCount }) => {
   const [turning, setTurning] = useState(false);
   const [dropping, setDropping] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -38,6 +39,22 @@ const GachaMachine = ({ onExtract, onRedraw, isExtracting, currentResult }) => {
     }
   }, [isExtracting]);
 
+  useEffect(() => {
+    if (showResult && currentResult) {
+      playTadaSound();
+    }
+  }, [showResult, currentResult]);
+
+  const getFontSize = (text) => {
+    if (!text) return '120px';
+    const len = text.length;
+    if (len <= 4) return '120px';
+    if (len <= 10) return '90px';
+    if (len <= 20) return '60px';
+    if (len <= 40) return '40px';
+    return '24px';
+  };
+
   return (
     <div className="gacha-container">
       <div className={`machine-body ${turning ? 'turning' : ''} ${dropping ? 'dropping' : ''}`}>
@@ -53,11 +70,33 @@ const GachaMachine = ({ onExtract, onRedraw, isExtracting, currentResult }) => {
       
       {showResult && currentResult && (
         <div className="result-reveal">
-          <p className="result-name">{currentResult}</p>
+          <p 
+            className="result-name" 
+            style={{ 
+              fontSize: getFontSize(currentResult), 
+              whiteSpace: 'nowrap',
+              padding: '0 20px'
+            }}
+          >
+            {currentResult}
+          </p>
           {onRedraw && (
-            <button className="button-secondary" style={{ marginTop: 'var(--spacing-md)', fontSize: '18px', padding: '8px 20px' }} onClick={onRedraw}>
-              다시 뽑기 🔄
-            </button>
+            <div style={{ marginTop: 'var(--spacing-md)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'var(--surface-white)', padding: '4px 12px', borderRadius: 'var(--rounded-pill)', border: '2px solid #fff', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+                <span style={{ fontSize: '18px', color: 'var(--ink)' }}>명수:</span>
+                <input 
+                  type="number" 
+                  min="1" 
+                  max={maxCount || 1}
+                  value={extractCount}
+                  onChange={(e) => setExtractCount(Math.max(1, parseInt(e.target.value) || 1))}
+                  style={{ width: '60px', textAlign: 'center', fontSize: '18px', padding: '4px', border: 'none', boxShadow: 'none', backgroundColor: 'transparent' }}
+                />
+              </div>
+              <button className="button-secondary" style={{ fontSize: '20px', padding: '10px 24px' }} onClick={onRedraw}>
+                다시 뽑기 🔄
+              </button>
+            </div>
           )}
         </div>
       )}

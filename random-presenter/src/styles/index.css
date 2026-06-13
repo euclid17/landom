@@ -61,7 +61,7 @@ body {
 
 /* Typography Classes */
 .display-xl { font-size: 86px; font-weight: 400; line-height: 1.1; }
-.display-lg { font-size: 48px; font-weight: 400; line-height: 1.2; text-shadow: 2px 2px 0px #fff; }
+.display-lg { font-size: 72px; font-weight: 400; line-height: 1.2; text-shadow: 2px 2px 0px #fff; }
 .headline { font-size: 28px; font-weight: 400; line-height: 1.35; }
 .subhead { font-size: 24px; font-weight: 400; line-height: 1.35; }
 .card-title { font-size: 22px; font-weight: 400; line-height: 1.45; }

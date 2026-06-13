@@ -159,7 +159,10 @@ function App() {
               textAlign: 'center',
               width: '100%',
               marginBottom: 'var(--spacing-xl)',
-              fontFamily: 'inherit'
+              fontFamily: 'inherit',
+              fontSize: '72px',
+              boxShadow: 'none',
+              textShadow: '2px 2px 0px #fff'
             }}
           />
 
@@ -181,6 +184,9 @@ function App() {
             onRedraw={handleRedraw}
             isExtracting={isExtracting} 
             currentResult={currentResult} 
+            extractCount={extractCount}
+            setExtractCount={setExtractCount}
+            maxCount={students.length}
           />
 
           {recentPicks.length > 0 && !isExtracting && (
