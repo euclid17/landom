@@ -54,7 +54,7 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const executeExtraction = (currentPickedList) => {
+  const executeExtraction = (currentPickedList, excludedPicks = []) => {
     if (students.length === 0) {
       alert('설정에서 학생 명단을 먼저 추가해주세요.');
       return;
@@ -70,9 +70,13 @@ function App() {
       availableStudents = [...students];
     }
 
+    let currentAvailable = availableStudents.filter(s => !excludedPicks.includes(s));
+    if (currentAvailable.length === 0) {
+      currentAvailable = [...availableStudents];
+    }
+
     const newPicks = [];
     let updatedSecretOrder = [...secretOrder];
-    let currentAvailable = [...availableStudents];
 
     for (let i = 0; i < extractCount; i++) {
       if (currentAvailable.length === 0) break;
@@ -110,26 +114,26 @@ function App() {
   };
 
   const handleExtract = () => {
-    executeExtraction(pickedStudents);
+    executeExtraction(pickedStudents, []);
   };
 
   const handleRedraw = () => {
     if (isExtracting) return;
     const remainingPicks = pickedStudents.filter(s => !recentPicks.includes(s));
+    const excluded = [...recentPicks];
     setPickedStudents(remainingPicks);
     setRecentPicks([]);
     setCurrentResult('');
     // 약간의 딜레이 후 재추출 (UI 리셋을 위해)
     setTimeout(() => {
-      executeExtraction(remainingPicks);
+      executeExtraction(remainingPicks, excluded);
     }, 100);
   };
 
   return (
     <div className="app-container">
-      {/* Top Nav (Monochrome Chrome) */}
-      <header className="top-nav">
-        <div style={{ fontWeight: 600, fontSize: '20px', letterSpacing: '-0.5px' }}>Figma-style Picker</div>
+      {/* Top Nav */}
+      <header className="top-nav" style={{ justifyContent: 'flex-end' }}>
         <div>
           {view === 'main' ? (
             <button className="button-secondary" onClick={() => setView('settings')}>명단 설정</button>

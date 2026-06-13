@@ -191,15 +191,15 @@
 
 /* Cute sparkles */
 .result-name::before, .result-name::after {
-  content: '🎀';
+  content: '✨🎀✨';
   position: absolute;
-  font-size: 2.5rem;
+  font-size: 3rem;
   opacity: 0;
   animation: sparkleCute 1.5s forwards 0.3s infinite alternate;
 }
 
-.result-name::before { top: -20px; right: -40px; transform: rotate(15deg); }
-.result-name::after { bottom: -20px; left: -40px; transform: rotate(-15deg); }
+.result-name::before { top: -30px; right: -50px; transform: rotate(15deg); }
+.result-name::after { bottom: -30px; left: -50px; transform: rotate(-15deg); }
 
 @keyframes sparkleCute {
   0% { transform: scale(0.8) rotate(-10deg); }
