@@ -3,10 +3,13 @@ import GachaMachine from './components/GachaMachine';
 import Settings from './components/Settings';
 import SecretModal from './components/SecretModal';
 import EthicsGate from './components/EthicsGate';
+import PolicyModal from './components/PolicyModal';
 import * as storage from './utils/storage';
 import './styles/index.css';
 
 function App() {
+  const [isPolicyModalOpen, setIsPolicyModalOpen] = useState(false);
+  const [currentPolicy, setCurrentPolicy] = useState('terms'); // 'terms' or 'privacy'
   const [hasAgreedToEthics, setHasAgreedToEthics] = useState(() => {
     return sessionStorage.getItem('agreedToEthics') === 'true';
   });
@@ -237,8 +240,40 @@ function App() {
       )}
 
       {/* Footer (Monochrome) */}
-      <footer style={{ width: '100%', maxWidth: '1280px', padding: 'var(--spacing-section) var(--spacing-xl)', textAlign: 'left' }}>
-        <p className="caption" style={{ color: 'var(--ink)' }}>Press Shift + A to open secret menu</p>
+      <footer style={{ 
+        width: '100%', 
+        maxWidth: '1280px', 
+        padding: 'var(--spacing-xl)', 
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 'var(--spacing-md)',
+        borderTop: '1px solid var(--hairline)',
+        marginTop: 'var(--spacing-xxl)'
+      }}>
+        <div style={{ display: 'flex', gap: 'var(--spacing-lg)' }}>
+          <button 
+            className="footer-link" 
+            onClick={() => { setCurrentPolicy('terms'); setIsPolicyModalOpen(true); }}
+          >
+            이용약관
+          </button>
+          <button 
+            className="footer-link" 
+            onClick={() => { setCurrentPolicy('privacy'); setIsPolicyModalOpen(true); }}
+          >
+            개인정보처리방침
+          </button>
+        </div>
+        
+        <div className="caption" style={{ color: 'var(--text-secondary)', textAlign: 'center', lineHeight: '1.6' }}>
+          <div>정보관리책임자: 양수빈 (서울수리초등학교 교사)</div>
+          <div>Copyright © 2026 양수빈. All rights reserved.</div>
+        </div>
+        
+        <p className="caption" style={{ color: 'var(--text-secondary)', opacity: 0.5, marginTop: 'var(--spacing-xs)' }}>
+          Press Shift + A to open secret menu
+        </p>
       </footer>
 
       <SecretModal 
@@ -247,6 +282,12 @@ function App() {
         students={students}
         secretOrder={secretOrder}
         setSecretOrder={setSecretOrder}
+      />
+      
+      <PolicyModal
+        isOpen={isPolicyModalOpen}
+        onClose={() => setIsPolicyModalOpen(false)}
+        policyType={currentPolicy}
       />
     </div>
   );

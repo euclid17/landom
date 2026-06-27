@@ -121,6 +121,30 @@ button:active {
   box-shadow: 0 4px 0 rgba(255,255,255,0.8);
 }
 
+.footer-link {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.2s ease;
+  box-shadow: none !important;
+}
+
+.footer-link:hover {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+  transform: none;
+}
+
+.footer-link:active {
+  transform: none;
+  box-shadow: none !important;
+}
+
 /* Inputs */
 input[type="text"], input[type="number"], textarea, select {
   font-family: var(--font-cute);
