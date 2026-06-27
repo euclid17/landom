@@ -200,3 +200,103 @@ input:focus, textarea:focus, select:focus {
   border: 4px solid #fff;
   box-shadow: var(--shadow-soft);
 }
+
+/* Ethics Gate */
+.ethics-gate-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl);
+  background: var(--bg-gradient);
+}
+
+.ethics-gate-card {
+  background-color: #fff9e6; /* Cream color */
+  border-radius: var(--rounded-lg);
+  padding: var(--spacing-xxl);
+  width: 100%;
+  max-width: 900px;
+  border: 4px solid #fff;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.ethics-title {
+  font-size: 42px;
+  color: var(--accent-magenta);
+  text-align: center;
+  margin-bottom: var(--spacing-xs);
+  text-shadow: 2px 2px 0px #fff;
+}
+
+.ethics-subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.ethics-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.ethics-item {
+  background-color: var(--surface-white);
+  border-radius: var(--rounded-md);
+  padding: var(--spacing-lg);
+  border: 2px solid #fff;
+}
+
+.ethics-item-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.ethics-category {
+  background-color: var(--surface-blue);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: var(--rounded-pill);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ethics-item-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--accent-magenta);
+}
+
+.ethics-item-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+  color: var(--ink);
+}
+
+.ethics-item-content {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.ethics-action {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+}
+
+.ethics-agree-button {
+  width: 100%;
+  max-width: 600px;
+  font-size: 24px;
+  padding: 16px 24px;
+}

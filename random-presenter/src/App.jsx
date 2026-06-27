@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import GachaMachine from './components/GachaMachine';
 import Settings from './components/Settings';
 import SecretModal from './components/SecretModal';
+import EthicsGate from './components/EthicsGate';
 import * as storage from './utils/storage';
 import './styles/index.css';
 
 function App() {
+  const [hasAgreedToEthics, setHasAgreedToEthics] = useState(() => {
+    return sessionStorage.getItem('agreedToEthics') === 'true';
+  });
   const [students, setStudents] = useState([]);
   const [secretOrder, setSecretOrder] = useState([]);
   const [pickedStudents, setPickedStudents] = useState([]);
@@ -140,6 +144,15 @@ function App() {
       executeExtraction(pickedStudents, []);
     }, 100);
   };
+
+  const handleEthicsAgree = () => {
+    sessionStorage.setItem('agreedToEthics', 'true');
+    setHasAgreedToEthics(true);
+  };
+
+  if (!hasAgreedToEthics) {
+    return <EthicsGate onAgree={handleEthicsAgree} />;
+  }
 
   return (
     <div className="app-container">
